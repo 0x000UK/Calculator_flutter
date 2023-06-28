@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Calculator
-A Simple Calculator
 =======
 # calculator
 
