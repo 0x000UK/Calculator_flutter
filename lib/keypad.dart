@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 class MyKeys extends StatelessWidget {
 
-  const MyKeys({super.key});
+  final Function fun;
+  const MyKeys({
+      Key? key,
+      required this.fun
+    }) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -12,24 +16,24 @@ class MyKeys extends StatelessWidget {
       //color: Colors.blue,
     child : GridView.count(
       crossAxisCount: 4,
-      children:const [
+      children: [
 
-          CalculatorButton(text: '7'),
-          CalculatorButton(text: '8'),
-          CalculatorButton(text: '9'),
-          CalculatorButton(text: '+'),
-          CalculatorButton(text: '4'),
-          CalculatorButton(text: '5'),
-          CalculatorButton(text: '6'),
-          CalculatorButton(text: '-'),
-          CalculatorButton(text: '1'),
-          CalculatorButton(text: '2'),
-          CalculatorButton(text: '3'),
-          CalculatorButton(text: 'x'),
-          CalculatorButton(text: '.'),
-          CalculatorButton(text: '0'),
-          CalculatorButton(text: '=', isEqualsButton: true),
-          CalculatorButton(text: '/'),
+          CalculatorButton(text: '7',function: fun),
+          CalculatorButton(text: '8',function: fun),
+          CalculatorButton(text: '9',function: fun),
+          CalculatorButton(text: '+',function: fun),
+          CalculatorButton(text: '4',function: fun),
+          CalculatorButton(text: '5',function: fun),
+          CalculatorButton(text: '6',function: fun),
+          CalculatorButton(text: '-',function: fun),
+          CalculatorButton(text: '1',function: fun),
+          CalculatorButton(text: '2',function: fun),
+          CalculatorButton(text: '3',function: fun),
+          CalculatorButton(text: 'x',function: fun),
+          CalculatorButton(text: '.',function: fun),
+          CalculatorButton(text: '0',function: fun),
+          CalculatorButton(text: '=',function: fun, isEqualsButton: true),
+          CalculatorButton(text: '/',function: fun),
         ],
       )
     )
@@ -41,10 +45,11 @@ class CalculatorButton extends StatelessWidget {
 
   final String text;
   final bool isEqualsButton;
-
+  final Function function;
 
   const CalculatorButton({
     Key? key,
+    required this.function,
     required this.text,
     this.isEqualsButton = false,
 
@@ -74,7 +79,7 @@ class CalculatorButton extends StatelessWidget {
         customBorder: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(45)),
         ),
-        onTap:() {},
+        onTap:() {function(text);},
         child: Center(
           child: Text(
             text,

@@ -37,6 +37,22 @@ class _MyHomePageState extends State<MyHomePage> {
   String input = '0';
   String output = '0';
 
+  void _onButtonPressed(String buttonText){
+      setState(() {
+        if(buttonText == '=') {
+          _calculateResult();
+        }else if(buttonText == 'C') {
+          _clearInput();
+        }else{
+            input += buttonText;
+        }
+      }
+    );
+  }
+
+  void _calculateResult(){}
+  void _clearInput(){}
+
   @override
   Widget build(BuildContext context) {
     Size  size = MediaQuery.of(context).size;
@@ -44,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           MyDisplay(screenSize: size, input: input, output: output),
-          const MyKeys()
+          MyKeys(fun: _onButtonPressed)
         ],
       )
     );
