@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'display.dart';
+import 'keypad.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,7 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Column(
         children: [
-          MyDisplay(screenSize: size, input: input, output: output)
+          MyDisplay(screenSize: size, input: input, output: output),
+          const MyKeys()
         ],
       )
     );
