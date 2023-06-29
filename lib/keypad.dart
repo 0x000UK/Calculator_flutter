@@ -13,11 +13,15 @@ class MyKeys extends StatelessWidget {
     return Expanded(
     
     child :Container(
-      //color: Colors.blue,
     child : GridView.count(
+      padding: const EdgeInsets.all(5),
+      mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: [
-
+          CalculatorButton(text: '(',function: fun,),
+          CalculatorButton(text: ')',function: fun,),
+          CalculatorButton(text: 'AC',function: fun,isAllClearButton: true),
+          CalculatorButton(text: 'C',function: fun, isBackButton: true),
           CalculatorButton(text: '7',function: fun),
           CalculatorButton(text: '8',function: fun),
           CalculatorButton(text: '9',function: fun),
@@ -45,6 +49,8 @@ class CalculatorButton extends StatelessWidget {
 
   final String text;
   final bool isEqualsButton;
+  final bool isAllClearButton;
+  final bool isBackButton;
   final Function function;
 
   const CalculatorButton({
@@ -52,7 +58,8 @@ class CalculatorButton extends StatelessWidget {
     required this.function,
     required this.text,
     this.isEqualsButton = false,
-
+    this.isAllClearButton = false,
+    this.isBackButton = false,
   }) : super(key: key);
 
   @override
@@ -73,7 +80,7 @@ class CalculatorButton extends StatelessWidget {
         borderRadius:const BorderRadius.all(
           Radius.circular(45)
         ),  
-        color: isEqualsButton?Colors.blue : Colors.white70,
+        color: isEqualsButton?Colors.blue : isAllClearButton?Colors.red: Colors.white70,
       ),
       child: InkWell(
         customBorder: const RoundedRectangleBorder(
@@ -81,7 +88,7 @@ class CalculatorButton extends StatelessWidget {
         ),
         onTap:() {function(text);},
         child: Center(
-          child: Text(
+          child: isBackButton?const Icon(Icons.backspace):Text(
             text,
             style: const TextStyle(fontSize: 30, color: Colors.black54),
           )
