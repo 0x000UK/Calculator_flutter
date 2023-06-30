@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 import 'display.dart';
 import 'keypad.dart';
 
@@ -36,25 +37,73 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String input = '0';
   String output = '0';
+  bool isEqualsButton = false;
 
   void _onButtonPressed(String buttonText){
       setState(() {
         if(buttonText == '=') {
           _calculateResult();
+          isEqualsButton = true;
         }else if(buttonText == 'C') {
           _clearInput();
+
+          if(input.isNotEmpty){
+            _calculateResult();
+          }
         }else if(buttonText == 'AC') {
           _allClear();
         }else{
+          if (input == '0') {
+            input = buttonText;
+          }else {
             input += buttonText;
+          }
         }
       }
     );
   }
 
-  void _calculateResult(){}
-  void _clearInput(){}
-  void _allClear(){}
+  void _calculateResult() {
+    try {
+      final expression = input.replaceAll('÷', '/').replaceAll('x', '*');
+      final evalResult = eval(expression);
+      output = evalResult.toString();
+    } catch (e) {
+      output = 'Error';
+    }
+  }
+
+  void _clearInput() {
+    if ( input.isNotEmpty || input != '0') {
+      input = input.substring(0, input.length - 1);
+      isEqualsButton = false;
+      if(input.isEmpty) {
+        input = '0';
+      }
+    }
+    if(input.isEmpty && output.isNotEmpty) {
+      output = '';
+      isEqualsButton = false;
+    }
+  }
+  
+  void _allClear(){
+    input = '0';
+    isEqualsButton = false;
+  }
+
+  double eval(String expression) {
+    try {
+      Parser parser = Parser();
+      ContextModel contextModel = ContextModel();
+      Expression exp = parser.parse(expression);
+      double result = exp.evaluate(EvaluationType.REAL, contextModel);
+
+      return result;
+    }catch (e){
+      return double.nan; // Return NaN (Not a Number) for invalid expressions
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
