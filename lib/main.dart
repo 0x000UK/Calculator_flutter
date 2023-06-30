@@ -43,6 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
           _calculateResult();
         }else if(buttonText == 'C') {
           _clearInput();
+        }else if(buttonText == 'AC') {
+          _allClear();
         }else{
             input += buttonText;
         }
@@ -52,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _calculateResult(){}
   void _clearInput(){}
+  void _allClear(){}
 
   @override
   Widget build(BuildContext context) {

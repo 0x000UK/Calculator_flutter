@@ -13,16 +13,27 @@ class MyDisplay extends StatelessWidget {
       required this.input,
       required this.output,
       this.isEqualsButtonPressed = false
-    }): super(key:key);
+    }
+  ): super(key:key);
 
-    Widget build(BuildContext context){
+  Widget build(BuildContext context){
+
+    //To check width of text span so that it does not over flow
+    final textSpan = TextSpan(
+      text: input,
+      style: const TextStyle(fontSize: 70, color: Colors.white)
+    );
+
+    final tp = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
+    tp.layout();
+
     return  Container(
       height: 200,
       color: Colors.black45,
       child :  Column(
         children: [
           isEqualsButtonPressed?
-             SizedBox (
+            SizedBox (
               width: screenSize.width,
               child : Column(
                 mainAxisSize: MainAxisSize.max,
@@ -37,8 +48,8 @@ class MyDisplay extends StatelessWidget {
                   ),
                   Text(
                     output,
-                    style:const  TextStyle(
-                      fontSize: 70.0,
+                    style: TextStyle(
+                      fontSize:  tp.width>screenSize.width?50.0: 40.0,
                       fontWeight: FontWeight.bold
                     ),
                   ),
@@ -51,7 +62,7 @@ class MyDisplay extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                   const Text(
+                  const Text(
                     '',
                     style: TextStyle(
                       fontSize: 35.0,
@@ -60,8 +71,8 @@ class MyDisplay extends StatelessWidget {
                   ),
                   Text(
                     input,
-                    style:const TextStyle(
-                      fontSize: 70.0,
+                    style: TextStyle(
+                      fontSize: tp.width>screenSize.width? 35.0 : 70.0,
                       fontWeight: FontWeight.bold
                     ),
                   ),
