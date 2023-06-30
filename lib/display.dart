@@ -28,10 +28,32 @@ class MyDisplay extends StatelessWidget {
     tp.layout();
 
     return  Container(
-      height: 200,
+      height: 300,
       color: Colors.black45,
       child :  Column(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.menu, size: 30,),
+                onPressed: (){},
+                tooltip: "Menu",
+              ),
+              const Text("Calculator",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.w500
+                )
+              ),
+              IconButton(
+                  icon: const Icon(Icons.more_vert_rounded, size: 30,),
+                  onPressed: (){},
+                  tooltip: "History",
+              )
+            ],
+          ),
           isEqualsButtonPressed?
             SizedBox (
               width: screenSize.width,
@@ -39,20 +61,43 @@ class MyDisplay extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    input,
-                    style: const TextStyle(
-                      fontSize: 35.0,
-                      fontWeight: FontWeight.bold
+                  const Text(
+                      '',
+                      style:TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+//                3. overflow bug fix
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    reverse: true,
+                    child : Text(
+                      input,
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
-                  Text(
-                    output,
-                    style: TextStyle(
-                      fontSize:  tp.width>screenSize.width?50.0: 40.0,
-                      fontWeight: FontWeight.bold
+                  const Text(
+                      '',
+                      style:TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
-                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    reverse: true,
+                    child: Text(
+                      output,
+                      style:const  TextStyle(
+                        fontSize: 60.0,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  )
                 ],
               )
             ) : 
@@ -62,20 +107,24 @@ class MyDisplay extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text(
+                  Text(
                     '',
                     style: TextStyle(
-                      fontSize: 35.0,
+                      fontSize: tp.width>screenSize.width?100.0: 90.0,
                       fontWeight: FontWeight.bold
                     ),
                   ),
-                  Text(
-                    input,
-                    style: TextStyle(
-                      fontSize: tp.width>screenSize.width? 35.0 : 70.0,
-                      fontWeight: FontWeight.bold
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    reverse: true,
+                    child :Text(
+                      input,
+                      style: TextStyle( 
+                        fontSize: tp.width>screenSize.width? 35.0 : 60.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
+                  )
                 ],
               )
             )

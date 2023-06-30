@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -47,9 +48,6 @@ class _MyHomePageState extends State<MyHomePage> {
         }else if(buttonText == 'C') {
           _clearInput();
 
-          if(input.isNotEmpty){
-            _calculateResult();
-          }
         }else if(buttonText == 'AC') {
           _allClear();
         }else{
@@ -111,8 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Column(
         children: [
-          MyDisplay(screenSize: size, input: input, output: output),
-          MyKeys(fun: _onButtonPressed)
+          MyDisplay(screenSize: size, input: input, output: output, isEqualsButtonPressed: isEqualsButton),
+          MyKeys(fun: _onButtonPressed, scrSize: size,)
         ],
       )
     );
