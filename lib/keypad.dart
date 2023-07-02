@@ -16,9 +16,11 @@ class MyKeys extends StatelessWidget {
     return Expanded(
     
     child :Container(
+      color: Colors.black45,
+      height: scrSize.height*0.6,
     child : GridView.count(
       padding:const EdgeInsets.all(5),
-      //mainAxisSpacing: (scrSize.height-300)/200,
+      physics: const NeverScrollableScrollPhysics(),
       crossAxisCount: 4,
       children: [
           CalculatorButton(text: '(',function: fun,),
@@ -73,11 +75,6 @@ class CalculatorButton extends StatelessWidget {
     padding: const EdgeInsets.all(10),
     child: Ink(
       decoration:  BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color:  isDarkThemeEnabled?Colors.black : Colors.white,
-          ),
-        ],
         borderRadius:const BorderRadius.all(
           Radius.circular(45)
         ),  
@@ -85,6 +82,7 @@ class CalculatorButton extends StatelessWidget {
                 isAllClearButton?Colors.red: 
                 isDarkThemeEnabled?Colors.black45 : 
                 Colors.white70,
+        //backgroundBlendMode: BlendMode.difference
       ),
       child: InkWell(
         customBorder: const RoundedRectangleBorder(

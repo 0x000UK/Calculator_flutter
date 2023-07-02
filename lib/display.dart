@@ -32,7 +32,7 @@ class MyDisplay extends StatelessWidget {
     tp.layout();
 
     return  Container(
-      height: 300,
+      height: screenSize.height/3,
       color: Colors.black45,
       child :  Column(
         children: [
