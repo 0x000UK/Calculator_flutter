@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 class MyKeys extends StatelessWidget {
 
   final Function fun;
+  final Size scrSize;
+
   const MyKeys({
       Key? key,
-      required this.fun
+      required this.fun,
+      required this.scrSize
     }) : super(key: key);
 
   @override
@@ -14,8 +17,8 @@ class MyKeys extends StatelessWidget {
     
     child :Container(
     child : GridView.count(
-      padding:const EdgeInsets.fromLTRB(0.0, 4, 0, 4),
-      mainAxisSpacing: 10,
+      padding:const EdgeInsets.all(5),
+      //mainAxisSpacing: (scrSize.height-300)/200,
       crossAxisCount: 4,
       children: [
           CalculatorButton(text: '(',function: fun,),
@@ -53,6 +56,8 @@ class CalculatorButton extends StatelessWidget {
   final bool isBackButton;
   final Function function;
 
+  static bool isDarkThemeEnabled = false;
+
   const CalculatorButton({
     Key? key,
     required this.function,
@@ -70,17 +75,18 @@ class CalculatorButton extends StatelessWidget {
       width: 60,
       height: 60,
       decoration:  BoxDecoration(
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color:  Colors.grey,
-            offset: Offset(2, 1),
-            blurRadius: 2
+            color:  isDarkThemeEnabled?Colors.black : Colors.white,
           ),
         ],
         borderRadius:const BorderRadius.all(
           Radius.circular(45)
         ),  
-        color: isEqualsButton?Colors.blue : isAllClearButton?Colors.red: Colors.white70,
+        color:  isEqualsButton?Colors.blue : 
+                isAllClearButton?Colors.red: 
+                isDarkThemeEnabled?Colors.black45 : 
+                Colors.white70,
       ),
       child: InkWell(
         customBorder: const RoundedRectangleBorder(
@@ -90,11 +96,12 @@ class CalculatorButton extends StatelessWidget {
         child: Center(
           child: isBackButton?const Icon(Icons.backspace):Text(
             text,
-            style: const TextStyle(fontSize: 30, color: Colors.black54),
+            style: TextStyle(fontSize: 30,
+              color: isDarkThemeEnabled?Colors.white : Colors.black54),
+            ),
           )
         ),
       ),
-    )
-  );
+    );
   }
 }
