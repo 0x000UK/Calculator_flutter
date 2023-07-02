@@ -72,8 +72,6 @@ class CalculatorButton extends StatelessWidget {
     return Padding(
     padding: const EdgeInsets.all(10),
     child: Ink(
-      width: 60,
-      height: 60,
       decoration:  BoxDecoration(
         boxShadow: [
           BoxShadow(

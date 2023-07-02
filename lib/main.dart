@@ -103,13 +103,21 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  void _onMoreButtonPressed(BuildContext context){}
+
   @override
   Widget build(BuildContext context) {
     Size  size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
         children: [
-          MyDisplay(screenSize: size, input: input, output: output, isEqualsButtonPressed: isEqualsButton),
+          MyDisplay(
+            screenSize: size,
+            input: input, 
+            output: output,
+            moreButtonFunc: _onMoreButtonPressed,
+            isEqualsButtonPressed: isEqualsButton
+          ),
           MyKeys(fun: _onButtonPressed, scrSize: size,)
         ],
       )

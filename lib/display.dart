@@ -6,12 +6,14 @@ class MyDisplay extends StatelessWidget {
   final Size screenSize;
   final String input;
   final String output;
+  final Function moreButtonFunc;
 
   const MyDisplay(
     {Key? key,
       required this.screenSize,
       required this.input,
       required this.output,
+      required this.moreButtonFunc,
       this.isEqualsButtonPressed = false
     }
   ): super(key:key);
@@ -42,15 +44,15 @@ class MyDisplay extends StatelessWidget {
               ),
               const Text("Calculator",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black45,
                   fontSize: 30.0,
                   fontWeight: FontWeight.w500
                 )
               ),
               IconButton(
                   icon: const Icon(Icons.more_vert_rounded, size: 30,),
-                  onPressed: (){},
-                  tooltip: "History",
+                  onPressed: (){moreButtonFunc (context);},
+                  tooltip: "more",
               )
             ],
           ),
