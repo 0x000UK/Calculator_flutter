@@ -7,6 +7,7 @@ class MyDisplay extends StatelessWidget {
   final String input;
   final String output;
   final Function moreButtonFunc;
+  final bool isDarkThemeEnabled;
 
   const MyDisplay(
     {Key? key,
@@ -14,7 +15,8 @@ class MyDisplay extends StatelessWidget {
       required this.input,
       required this.output,
       required this.moreButtonFunc,
-      this.isEqualsButtonPressed = false
+      this.isEqualsButtonPressed = false,
+      this.isDarkThemeEnabled = false
     }
   ): super(key:key);
 
@@ -23,7 +25,7 @@ class MyDisplay extends StatelessWidget {
     //To check width of text span so that it does not over flow
     final textSpan = TextSpan(
       text: input,
-      style: const TextStyle(fontSize: 70, color: Colors.white)
+      style: const TextStyle(fontSize: 70)
     );
 
     final tp = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
@@ -42,9 +44,9 @@ class MyDisplay extends StatelessWidget {
                 onPressed: (){},
                 tooltip: "Menu",
               ),
-              const Text("Calculator",
+              Text("Calculator",
                 style: TextStyle(
-                  color: Colors.black45,
+                  color: isDarkThemeEnabled?Colors.white30 : Colors.black54,
                   fontSize: 30.0,
                   fontWeight: FontWeight.w500
                 )
@@ -76,7 +78,8 @@ class MyDisplay extends StatelessWidget {
                     reverse: true,
                     child : Text(
                       input,
-                      style: const TextStyle(
+                      style: TextStyle(
+                        color: isDarkThemeEnabled?Colors.white54 : Colors.black54,
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold
                       ),
@@ -94,7 +97,8 @@ class MyDisplay extends StatelessWidget {
                     reverse: true,
                     child: Text(
                       output,
-                      style:const  TextStyle(
+                      style: TextStyle(
+                        color: isDarkThemeEnabled?Colors.white54 : Colors.black54,
                         fontSize: 60.0,
                         fontWeight: FontWeight.bold
                       ),
@@ -112,6 +116,7 @@ class MyDisplay extends StatelessWidget {
                   Text(
                     '',
                     style: TextStyle(
+                      color:isDarkThemeEnabled?Colors.white54 : Colors.black54,
                       fontSize: tp.width>screenSize.width?100.0: 90.0,
                       fontWeight: FontWeight.bold
                     ),
@@ -122,6 +127,7 @@ class MyDisplay extends StatelessWidget {
                     child :Text(
                       input,
                       style: TextStyle( 
+                        color: isDarkThemeEnabled?Colors.white54 : Colors.black54,
                         fontSize: tp.width>screenSize.width? 35.0 : 60.0,
                         fontWeight: FontWeight.bold,
                       ),

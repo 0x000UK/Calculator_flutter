@@ -92,7 +92,11 @@ class CalculatorButton extends StatelessWidget {
         ),
         onTap:() {function(text);},
         child: Center(
-          child: isBackButton?const Icon(Icons.backspace):Text(
+          child: isBackButton? 
+          Icon(Icons.backspace, 
+            color: isDarkThemeEnabled?Colors.white : Colors.black
+          )
+          :Text(
             text,
             style: TextStyle(fontSize: 30,
               color: isDarkThemeEnabled?Colors.white : Colors.black54),

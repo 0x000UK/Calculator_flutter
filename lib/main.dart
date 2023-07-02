@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String input = '0';
   String output = '0';
   bool isEqualsButton = false;
+  bool isDarkThemeenabled = false;
 
   void _onButtonPressed(String buttonText){
       setState(() {
@@ -103,23 +104,65 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void _onMoreButtonPressed(BuildContext context){}
+  void _onMoreButtonPressed(BuildContext context){
+    showMenu(
+      context: context, 
+      position:const RelativeRect.fromLTRB(800, 0, 50, 0), 
+      elevation: 10,
+      //shadowColor: Colors.black,
+      items: [
+        PopupMenuItem(
+          child: ListTile(
+            //leading:const Icon(Icons.person),
+            title:const Text('Light theme'),
+            onTap: () {
+              setState(() {
+                CalculatorButton.isDarkThemeEnabled = false;
+                isDarkThemeenabled = false;
+              });
+              // Handle profile tap
+              Navigator.pop(context); // Close the menu
+            },
+          ),
+        ),
+        PopupMenuItem(
+          child: ListTile(
+            //leading: const Icon(Icons.image),
+            title:const Text('Dark theme'),
+            onTap: () {
+              setState(() {
+                CalculatorButton.isDarkThemeEnabled = true;
+                isDarkThemeenabled = true;
+              });
+              // Handle settings tap
+              //isDarkThemeenabled = true; // Close the menu
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     Size  size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Column(
-        children: [
-          MyDisplay(
-            screenSize: size,
-            input: input, 
-            output: output,
-            moreButtonFunc: _onMoreButtonPressed,
-            isEqualsButtonPressed: isEqualsButton
-          ),
-          MyKeys(fun: _onButtonPressed, scrSize: size,)
-        ],
+    return SafeArea(
+      child :Scaffold(
+        backgroundColor: isDarkThemeenabled?Colors.black: Colors.white,
+        body: Column(
+          children: [
+            MyDisplay(
+              screenSize: size,
+              input: input, 
+              output: output,
+              moreButtonFunc: _onMoreButtonPressed,
+              isEqualsButtonPressed: isEqualsButton,
+              isDarkThemeEnabled: isDarkThemeenabled,
+            ),
+            MyKeys(fun: _onButtonPressed, scrSize: size,)
+          ],
+        )
       )
     );
   }
